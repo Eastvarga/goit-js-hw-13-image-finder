@@ -20,10 +20,9 @@ const myStack = new Stack({
   firstpos2: 30,
   context: document.body,
 });
-error({
-  ...defaults,
+const errorOptions = {
   title: 'Some Error',
   text: 'Why default styles not work on me',
-  module: defaultModules,
   stack: myStack,
-});
+  delay: 2000,
+};
