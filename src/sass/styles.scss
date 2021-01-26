@@ -1,26 +1,37 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.search-form {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 #search-form input {
   display: flex;
-  margin: 30px auto;
+  margin: 0 auto;
   font-size: 24px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 img {
   display: block;
   margin: 0;
   padding: 0;
 }
-
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding: 0;
-  list-style: none;
-  // margin: -15px;
+  padding: 25px 0;
+  // list-style: none;
 }
-// .gallery > li {
-//   margin: 15px;
-//   width: calc((100% / 3)-30px);
-// }
+
 .stats {
   display: flex;
   flex-wrap: wrap;
@@ -32,4 +43,14 @@ img {
   width: 150px;
   color: rgba(233, 242, 250, 0.78);
   background-color: rgb(22, 114, 199);
+}
+.button.is-hidden {
+  display: none;
+}
+#spinner.is-hidden {
+  display: none;
+}
+.intersection-observer-triger {
+  display: block;
+  height: 1px;
 }
