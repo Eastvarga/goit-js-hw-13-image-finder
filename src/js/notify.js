@@ -5,6 +5,7 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/mobile/dist/PNotifyMobile.css';
 
 import {
+  notice,
   error,
   defaultModules,
   defaults,
@@ -20,9 +21,10 @@ const myStack = new Stack({
   firstpos2: 30,
   context: document.body,
 });
-const errorOptions = {
-  title: 'Some Error',
-  text: 'Why default styles not work on me',
+const noticeOptions = {
+  title: 'Serching for images',
+  text: 'Awaiting response from server',
   stack: myStack,
   delay: 2000,
 };
+
