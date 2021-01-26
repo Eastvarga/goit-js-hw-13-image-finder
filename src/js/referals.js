@@ -1,8 +1,7 @@
-const refs = {
-  body: document.body,
-  form: document.getElementById('search-form'),
-  gallery: document.querySelector('.gallery'),
-  button: document.querySelector('.button[data-action="load-more"]'),
-};
-
-export default refs;
+const body = document.body;
+const form = document.getElementById('search-form');
+const gallery = document.querySelector('.gallery');
+const intersectionObserverTriger = document.querySelector(
+  '.intersection-observer-triger',
+);
+export default { body, form, gallery, intersectionObserverTriger };
