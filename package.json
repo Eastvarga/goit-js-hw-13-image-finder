@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "@pnotify/confirm": "^5.2.0",
+    "basiclightbox": "^5.0.4",
     "core-js": "^3.6.5",
     "infinite-scroll": "^4.0.1",
     "jquery": "^3.5.1",
