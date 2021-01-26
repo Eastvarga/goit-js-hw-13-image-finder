@@ -11,7 +11,7 @@ export default {
     const url = `https://pixabay.com/api/?q=${this.searchQuery}&${this.filter}&per_page=${this.itemsPerPage}&page=${this.page}&key=${this.apiKey}`;
     return fetch(url)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         return response.json();
       })
       .then(({ hits }) => {
@@ -31,8 +31,5 @@ export default {
   },
   set query(newQuery) {
     this.searchQuery = newQuery;
-  },
-  get urlForScroll() {
-    return this.url;
   },
 };
