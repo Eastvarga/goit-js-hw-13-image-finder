@@ -53,7 +53,7 @@ const options = {
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.intersectionRatio > 0) {
-      if (apiService.query !== '' && document.body.offsetHeight > 1000) {
+      if (apiService.query !== '' && document.body.offsetHeight > 600) {
         fetchImages();
       }
     }
