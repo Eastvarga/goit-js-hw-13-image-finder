@@ -29,7 +29,7 @@ const noticeOptions = {
   delay: 2000,
 };
 const errorOptions = {
-  itle: 'Ups, no response',
+  title: 'Ups, no response',
   text: '',
   stack: myStack,
   delay: 2000,
@@ -86,18 +86,20 @@ const updateMarkup = hits => {
   return hits;
 };
 //-------------------------------------------------
-//-fetchImages--- main fetch()-----------------------------------
+//-fetchImages--- main fetch()---------------------------npm--------
 function fetchImages() {
   loadMoreBtn.disable();
 
   //notice call------------------------
   notice(noticeOptions);
   //-----------------------------------
-  apiService.imageSearch().then(updateMarkup);
-  // .catch(eror => {
-  //   console.dir(eror);
-  //   error({ ...errorOptions, text: eror.message });
-  // });
+  apiService
+    .imageSearch()
+    .then(updateMarkup)
+    .catch(er => {
+      console.dir(er);
+      error({ ...errorOptions, text: er.message });
+    });
   // .finally(scrollImage);
 }
 // load more btn handler----------------
