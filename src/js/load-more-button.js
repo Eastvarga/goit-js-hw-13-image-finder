@@ -1,8 +1,10 @@
 const loadMoreBtn = {
   refs: {
     button: document.querySelector('.button[data-action="load-more"]'),
-    spinner: document.querySelector('#spinner'),
-    btnLabel: document.querySelector('.label'),
+    spinner: document.querySelector(
+      '.button[data-action="load-more"] #spinner',
+    ),
+    btnLabel: document.querySelector('.button[data-action="load-more"] .label'),
   },
   enable() {
     this.refs.button.disabled = false;
@@ -16,6 +18,9 @@ const loadMoreBtn = {
   },
   show() {
     this.refs.button.classList.remove('is-hidden');
+  },
+  hidden() {
+    this.refs.button.classList.add('is-hidden');
   },
 };
 export default loadMoreBtn;

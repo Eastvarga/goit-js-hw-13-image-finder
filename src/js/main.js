@@ -47,69 +47,108 @@ import modalShowHandler from './modalShowHandler';
 //intersectionObserver---------------------
 const options = {
   root: null,
-  threshold: 1,
-  rootMargin: '200px',
+  // threshold: 1,
+  rootMargin: '0px',
 };
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.intersectionRatio > 0) {
-      if (apiService.query !== '' && document.body.offsetHeight > 600) {
+      if (apiService.query !== '' /* && document.body.offsetHeight > 600*/) {
         fetchImages();
       }
     }
   });
 }, options);
 //----------------------------------------
+
+// For Scroll-------////////////
 // scroll---------------------------------
 // const scrolOption = {
-//   top: 100,
+//   top: 0,
+// };
+// const buttonForScroll = document.querySelector(
+//   '.button[data-action="load-more"]',
+// );
+// const scrollCoordinates = () => {
+//   return (
+//     refs.gallery.scrollHeight -
+//     (apiService.perPage / 3) * refs.gallery.lastElementChild.clientHeight -
+//     buttonForScroll.clientHeight
+//   );
 // };
 //scroll function-------------------------
 // const scrollImage = () => {
 //   setTimeout(() => {
-//     // console.log(scrolOption.top);
-//     // console.dir(document.body.offsetHeight);
-//     scrolOption.top = document.body.offsetHeight;
-//     window.scrollTo(scrolOption);
-//   }, 1700);
+// console.log(scrolOption.top);
+// console.log(`refs.gallery.scrollTop: ${refs.gallery.scrollTop}`);
+// console.log(`refs.gallery.scrollHeight: ${refs.gallery.scrollHeight}`);
+// console.log(
+//   `refs.gallery.lastChild.scrollTop: ${refs.gallery.lastElementChild}`,
+// );
+// console.log(
+//   `refs.gallery.lastChild.scrollTop: ${refs.gallery.lastElementChild.scrollTop}`,
+// );
+// console.log(
+//   `refs.gallery.lastChild.clientHeight: ${refs.gallery.lastElementChild.clientHeight}`,
+// );
+// console.log(
+//   `buttonForScroll.clientHeight: ${buttonForScroll.clientHeight}`,
+// );
+//   scrolOption.top = scrollCoordinates();
+//   window.scrollTo(scrolOption);
+// }, 1700);
 // };
+// END For Scroll-------////////////
 // updateMarkUp----------------------------------
-const updateMarkup = hits => {
+const updateMarkup = response => {
   //   console.dir(data);
-  const markup = galleryItems(hits);
+  if (response === null) {
+    notice({
+      ...noticeOptions,
+      title: 'Ops! No more Images',
+      text: 'Try to find something else!',
+    });
+    loadMoreBtn.enable();
+    loadMoreBtn.hidden();
+    return response;
+  }
+  const markup = galleryItems(response.hits);
   //   console.dir(referal.gallery);
   //   console.dir(markup);
   refs.gallery.insertAdjacentHTML('beforeend', markup);
   loadMoreBtn.enable();
   loadMoreBtn.show();
 
-  return hits;
+  return response;
 };
 //-------------------------------------------------
 //-fetchImages--- main fetch()---------------------------npm--------
 function fetchImages() {
   loadMoreBtn.disable();
-
+  if (refs.gallery.lastElementChild !== null) {
+    observer.unobserve(refs.gallery.lastElementChild);
+  }
   //notice call------------------------
-  notice(noticeOptions);
+  // notice(noticeOptions);
   //-----------------------------------
   apiService
     .imageSearch()
     .then(updateMarkup)
+    .then(response => {
+      observer.observe(refs.gallery.lastElementChild);
+      return response;
+    })
     .catch(er => {
       console.dir(er);
       error({ ...errorOptions, text: er.message });
     });
-  // .finally(scrollImage);
+  // .finally(scrollImage); //For scroll-----////////
 }
-// load more btn handler----------------
-// const btnLoadMoreHandler = event => {
-//   fetchImages();
-// };
-//------------------------------------------
+
 //submit handler-------------------------------
 const submitHandler = event => {
   event.preventDefault();
+
   const form = event.currentTarget;
   apiService.query = form.elements.query.value;
   refs.gallery.innerHTML = '';
@@ -120,11 +159,18 @@ const submitHandler = event => {
 //----------------------------------------------
 
 refs.form.addEventListener('submit', submitHandler);
+//FOR "load More" button ------//////////
+// load more btn handler----------------
+// const btnLoadMoreHandler = event => {
+//   fetchImages();
+// };
+//------------------------------------------
 // btn load more------------------------------------------
 // loadMoreBtn.refs.button.addEventListener('click', btnLoadMoreHandler);
 // gallery click modal ------------------------------------------------
+//END "load More" button ------//////////
 refs.gallery.addEventListener('click', modalShowHandler);
 
 //---------------------------------------------------------------------
-observer.observe(refs.intersectionObserverTriger);
-//  observer.unobserve(refs.intersectionObserverTriger);
+// observer.observe(refs.gallery.lastElementChild);
+//  observer.unobserve(refs.gallery.lastElementChild);

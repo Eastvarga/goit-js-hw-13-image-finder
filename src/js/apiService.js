@@ -14,9 +14,21 @@ export default {
         // console.log(response);
         return response.json();
       })
-      .then(({ hits }) => {
-        this.incrementPage();
-        return hits;
+      .then(response => {
+        if (response.total !== 0) {
+          if (this.page <= response.total / this.itemsPerPage + 1) {
+            // console.log(`response.total:  ${response.total}`);
+            // console.log(`this.page: ${this.page}`);
+            // console.log(
+            //   `response.total / this.itemsPerPage: ${
+            //     response.total / this.itemsPerPage
+            //   }`,
+            // );
+            this.incrementPage();
+            return response;
+          }
+        }
+        return null;
       })
       .catch();
   },
@@ -31,5 +43,8 @@ export default {
   },
   set query(newQuery) {
     this.searchQuery = newQuery;
+  },
+  get perPage() {
+    return this.itemsPerPage;
   },
 };
