@@ -1,7 +1,10 @@
+@import './common/variables.scss';
 html {
   scroll-behavior: smooth;
 }
-
+body {
+  background-color: var(--icon-background-color);
+}
 .search-form {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -13,9 +16,13 @@ html {
   font-size: 24px;
   padding-top: 4px;
   padding-bottom: 4px;
+  line-height: 1.3;
+  background-color: var(--input-background-color);
 }
 img {
   display: block;
+  width: 100%;
+  height: 230px;
   margin: 0;
   padding: 0;
 }
@@ -24,18 +31,54 @@ ul {
   margin: 0;
   list-style: none;
 }
+.container {
+  width: 1280px;
+  padding-right: 25px;
+  padding-left: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .gallery {
+  // outline: 1px solid teal;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   padding: 25px 0;
-  // list-style: none;
+  margin-left: calc(-1 * var(--card-set-gap));
+  margin-top: calc(-1 * var(--card-set-gap));
 }
-
+.gallery > li {
+  // outline: 1px solid teal;
+  flex-basis: calc(100% / 3 - var(--card-set-gap));
+  margin-left: var(--card-set-gap);
+  margin-top: var(--card-set-gap);
+}
+.photo-card {
+  border: var(--border-set);
+  border-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-top-radius);
+  border-top-left-radius: var(--card-border-top-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
 .stats {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-left: var(--stats-set-gap);
+  padding-right: var(--stats-set-gap);
+  font-weight: 700;
+  background-color: var(--icon-background-color);
+}
+.stats-item {
+  display: flex;
+  margin: 10px 0;
+  color: var(--color-material-icon);
+}
+.material-icons {
+  margin-right: var(--stats-set-gap);
+}
+.material-icons.md-dark {
+  color: var(--color-material-icon);
 }
 .button {
   display: block;
@@ -53,4 +96,9 @@ ul {
 .intersection-observer-triger {
   display: block;
   height: 1px;
+}
+.modal-image {
+  border: var(--border-set);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
 }
