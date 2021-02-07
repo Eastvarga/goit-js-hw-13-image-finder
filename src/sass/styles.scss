@@ -57,8 +57,12 @@ ul {
   border-radius: var(--card-border-radius);
   border-top-right-radius: var(--card-border-top-radius);
   border-top-left-radius: var(--card-border-top-radius);
-  box-shadow: var(--card-shadow);
+  // box-shadow: var(--card-shadow);
   overflow: hidden;
+  &:hover,
+  &:focus {
+    box-shadow: var(--card-shadow-focus);
+  }
 }
 .stats {
   display: flex;
@@ -92,10 +96,6 @@ ul {
 }
 #spinner.is-hidden {
   display: none;
-}
-.intersection-observer-triger {
-  display: block;
-  height: 1px;
 }
 .modal-image {
   border: var(--border-set);
