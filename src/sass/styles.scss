@@ -3,6 +3,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  position: relative;
   background-color: var(--icon-background-color);
 }
 .search-form {
@@ -103,4 +104,27 @@ ul {
   border: var(--border-set);
   border-radius: var(--card-border-radius);
   overflow: hidden;
+}
+.up-scroll {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+  color: rgba(220, 20, 60, 0.445);
+  background-color: burlywood;
+  border: 2px solid rgba(224, 154, 132, 0.479);
+  &:focus,
+  &:hover {
+    background-color: rgba(226, 143, 118, 0.972);
+    color: rgba(220, 20, 60, 0.767);
+  }
+  &.is-hidden {
+    display: none;
+  }
 }

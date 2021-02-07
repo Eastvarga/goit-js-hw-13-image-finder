@@ -53,8 +53,15 @@ const options = {
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.intersectionRatio > 0) {
-      if (apiService.query !== '' /* && document.body.offsetHeight > 600*/) {
+      if (apiService.query !== '') {
         fetchImages();
+        // if (
+        //   window.pageYOffset >
+        //   2 * refs.gallery.lastElementChild.clientHeight
+        // ) {
+        // console.log('remove is-hidden');
+        refs.upBtn.classList.remove('is-hidden');
+        // }
       }
     }
   });
@@ -126,10 +133,11 @@ const updateMarkup = response => {
 //-fetchImages--- main fetch()---------------------------npm--------
 function fetchImages() {
   loadMoreBtn.disable();
-
+  refs.upBtn.classList.add('is-hidden');
   if (refs.gallery.lastElementChild !== null) {
     observer.unobserve(refs.gallery.lastElementChild);
   }
+
   //notice call------------------------
   // notice(noticeOptions);
   //-----------------------------------
@@ -178,3 +186,6 @@ refs.gallery.addEventListener('click', modalShowHandler);
 //---------------------------------------------------------------------
 // observer.observe(refs.gallery.lastElementChild);
 //  observer.unobserve(refs.gallery.lastElementChild);
+refs.upBtn.addEventListener('click', event => {
+  window.scrollTo({ top: 0 });
+});
