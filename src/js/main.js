@@ -137,7 +137,7 @@ function fetchImages() {
     .imageSearch()
     .then(updateMarkup)
     .then(response => {
-      if (refs.gallery.lastElementChild !== null) {
+      if (refs.gallery.lastElementChild !== null && response !== null) {
         observer.observe(refs.gallery.lastElementChild);
       }
       return response;
