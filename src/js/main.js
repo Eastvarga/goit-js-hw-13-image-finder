@@ -122,9 +122,11 @@ const updateMarkup = response => {
   return response;
 };
 //-------------------------------------------------
+
 //-fetchImages--- main fetch()---------------------------npm--------
 function fetchImages() {
   loadMoreBtn.disable();
+
   if (refs.gallery.lastElementChild !== null) {
     observer.unobserve(refs.gallery.lastElementChild);
   }
@@ -135,7 +137,9 @@ function fetchImages() {
     .imageSearch()
     .then(updateMarkup)
     .then(response => {
-      observer.observe(refs.gallery.lastElementChild);
+      if (refs.gallery.lastElementChild !== null) {
+        observer.observe(refs.gallery.lastElementChild);
+      }
       return response;
     })
     .catch(er => {
