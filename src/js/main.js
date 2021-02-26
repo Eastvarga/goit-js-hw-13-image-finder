@@ -162,6 +162,9 @@ const submitHandler = event => {
   event.preventDefault();
 
   const form = event.currentTarget;
+  if (form.elements.query.value < 1) {
+    return;
+  }
   apiService.query = form.elements.query.value;
   refs.gallery.innerHTML = '';
   form.reset();
